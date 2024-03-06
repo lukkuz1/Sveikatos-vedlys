@@ -1,1 +1,0 @@
-# Sveikatos-vedlys
