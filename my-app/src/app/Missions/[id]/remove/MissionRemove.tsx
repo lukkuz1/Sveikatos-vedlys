@@ -1,23 +1,33 @@
-import React, { useState } from "react";
-import { getDatabase, ref, set, push, get, remove} from "firebase/database";
+import React from "react";
+import { getDatabase, ref, remove } from "firebase/database";
+import { useParams, useNavigate } from "react-router-dom";
 import { app } from "../../../../services/firebase";
+import './MissionRemove.css';
 
-export default function MissionRemove() {
+const MissionRemove = () => {
+  const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
 
-  const DeleteData = async () => {
-    const db = getDatabase(app);
-    const newDoc = push(ref(db, "missions"));
-    remove(newDoc);
+  const handleDelete = async () => {
+    try {
+      const db = getDatabase(app);
+      const missionRef = ref(db, `missions/${id}`);
+      await remove(missionRef);
+      alert("Iššūkis sėkmingai ištrintas!");
+      navigate("/missions");
+    } catch (error) {
+      console.error("Error deleting mission:", error);
+    }
   };
 
-
-
   return (
-    <div className="all">
-      <div className="add">
-        <h2>Misijos ištrinimas</h2>
-        <button onClick={DeleteData}>Ištrinti</button>
+    <div className="remove">
+      <div className="remove-1">
+        <h2>Iššūkio ištrinimas</h2>
+        <button onClick={handleDelete}>Ištrinti</button>
       </div>
     </div>
   );
-}
+};
+
+export default MissionRemove;

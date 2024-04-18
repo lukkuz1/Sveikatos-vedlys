@@ -5,6 +5,9 @@ import Login from './app/Login/Login';
 import Register from './app/Register/Register'; // Assuming you have a Register component
 import Missions from './app/Missions/Missions';
 import MissionAdd from './app/Missions/add/MissionAdd';
+import Mission from './app/Missions/[id]/Mission';
+import MissionRemove from './app/Missions/[id]/remove/MissionRemove';
+import MissionUpdate from './app/Missions/[id]/update/MissionUpdate';
 
 function App() {
   let signedIn = true; // Change this to true or false to see different button sets
@@ -51,6 +54,9 @@ export default function MainApp() {
         <Route path="/register" Component={Register} /> {/* Using "component" instead of "Component" */}
         <Route path="/missions" Component={Missions} /> {/* Using "component" instead of "Component" */}
         <Route path="/missions/add" Component={MissionAdd} /> {/* Using "component" instead of "Component" */}
+        <Route path="/missions/:id" Component={Mission} />
+        <Route path="/missions/:id/remove" Component={MissionRemove} />
+        <Route path="/missions/:id/update" Component={MissionUpdate} />
         </Routes>
         
       </div>

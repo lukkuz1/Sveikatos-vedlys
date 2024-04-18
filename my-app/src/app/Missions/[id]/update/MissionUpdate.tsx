@@ -1,63 +1,101 @@
-import React, {useState, useEffect} from 'react';
-import { app } from "../../../../services/firebase";
-import { getDatabase, ref, set, get } from "firebase/database";
-import { useNavigate, useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { getDatabase, ref, set, get } from 'firebase/database';
+import { app } from '../../../../services/firebase';
+import Mission from '../Mission';
+import './MissionUpdate.css'; // Import the CSS file
 
-function MissionUpdate() {
+enum MissionType {
+  Type1 = "sporto",
+  Type2 = "miego",
+  Type3 = "mitybos",
+}
 
-  const {firebaseId} = useParams();
+enum MissionDuration {
+  Duration1 = "diena",
+  Duration2 = "savaitė",
+}
 
-  let [inputValue1, setInputValue1] = useState("");
-  let [inputValue2, setInputValue2] = useState("");
+const MissionUpdate: React.FC = () => {
+  const { id } = useParams<{ id: string }>();
+  const [mission, setMission] = useState<Mission | null>(null);
+  const [inputValues, setInputValues] = useState<Mission>({ id: '', missionDescription: '', missionType: '', missionDuration: '' });
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const db = getDatabase(app);
-            const dbRef = ref(db, "missions/"+firebaseId);
-            const snapshot = await get(dbRef);
-            if(snapshot.exists()) {
-              const targetObject = snapshot.val();
-              setInputValue1(targetObject);
-              setInputValue2(targetObject);
-            } else {
-              alert("error");
-            }
+  useEffect(() => {
+    const fetchMission = async () => {
+      try {
+        const db = getDatabase(app);
+        const missionRef = ref(db, `missions/${id}`);
+        const snapshot = await get(missionRef);
+
+        if (snapshot.exists()) {
+          setMission({ id, ...snapshot.val() });
+          setInputValues({ id, ...snapshot.val() });
+        } else {
+          console.log('Mission not found');
         }
-        fetchData();
-    }, [firebaseId])
-    
+      } catch (error) {
+        console.error('Error fetching mission:', error);
+      }
+    };
 
-  const overwriteData = async () => {
-    const db = getDatabase(app);
-    const newDocRef = ref(db, "missions/"+firebaseId);
-    set(newDocRef, {
-      missionName: inputValue1,
-      missionDescription: inputValue2
-    }).then( () => {
-      alert("data updated successfully")
-    }).catch((error) => {
-      alert("error: "+ error);
-    })
+    fetchMission();
+  }, [id]);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setInputValues({ ...inputValues, [name]: value });
+  };
+
+  const handleUpdate = async () => {
+    try {
+      const db = getDatabase(app);
+      const missionRef = ref(db, `missions/${id}`);
+      await set(missionRef, inputValues);
+      setSuccessMessage('Sėkmingai redaguotas iššūkis!');
+      // Hide success message after 3 seconds
+      setTimeout(() => {
+        setSuccessMessage(null);
+      }, 2000);
+    } catch (error) {
+      console.error('Error updating mission:', error);
+    }
+  };
+
+  if (!mission) {
+    return <div>Loading...</div>;
   }
 
-
   return (
-    <div>
-
-      <h1>UPDATE</h1>
-
-      <input type='text' value={inputValue1} 
-      onChange={(e) => setInputValue1(e.target.value)}/> 
-
-      <input type='text' value={inputValue2} 
-      onChange={(e) => setInputValue2(e.target.value)}/> <br/>
-
-      <button onClick={overwriteData}>UPDATE</button>
-      <br />
-      <br />
-      <br />
+    <div className="container">
+      <div className="form">
+        <h1>Redaguoti</h1>
+        {successMessage && <div className="success-message">{successMessage}</div>}
+        <div>
+          <label className="label" htmlFor="missionDescription">Aprašymas:</label>
+          <input className="input" type="text" id="missionDescription" name="missionDescription" value={inputValues.missionDescription} onChange={handleChange} />
+        </div>
+        <div>
+          <label className="label" htmlFor="missionType">Tipas:</label>
+          <select className="select" id="missionType" name="missionType" value={inputValues.missionType} onChange={handleChange}>
+            {Object.values(MissionType).map((type) => (
+              <option key={type} value={type}>{type}</option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <label className="label" htmlFor="missionDuration">Trukmė:</label>
+          <select className="select" id="missionDuration" name="missionDuration" value={inputValues.missionDuration} onChange={handleChange}>
+            {Object.values(MissionDuration).map((duration) => (
+              <option key={duration} value={duration}>{duration}</option>
+            ))}
+          </select>
+        </div>
+        <button className="button" onClick={handleUpdate}>Redaguoti</button>
+      </div>
     </div>
-  )
-}
+  );
+};
 
 export default MissionUpdate;
