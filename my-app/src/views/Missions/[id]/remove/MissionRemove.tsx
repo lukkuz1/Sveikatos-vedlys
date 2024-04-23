@@ -8,6 +8,14 @@ const MissionRemove = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
+  const DisplayMissionDelete= async () => {
+    // Implementation
+  };
+
+  const SubmitConfirmation = async () => {
+    // Implementation
+  };
+
   const handleDelete = async () => {
     try {
       const db = getDatabase(app);

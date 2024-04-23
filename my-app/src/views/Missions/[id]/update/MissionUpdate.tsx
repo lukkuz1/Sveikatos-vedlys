@@ -23,6 +23,14 @@ const MissionUpdate: React.FC = () => {
   const [inputValues, setInputValues] = useState<MissionInterface>({ id: '', missionDescription: '', missionType: '', missionDuration: '' });
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
+  const DisplayMissionEdit= async () => {
+    // Implementation
+  };
+
+  const SubmitMissionEdit = async () => {
+    // Implementation
+  };
+
   useEffect(() => {
     const fetchMission = async () => {
       try {

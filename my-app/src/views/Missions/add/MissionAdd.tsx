@@ -30,6 +30,14 @@ export default function MissionAdd() {
     setInputValue3(e.target.value as MissionDuration);
   };
 
+  const DisplayMissionAdd= async () => {
+    // Implementation
+  };
+
+  const AddMission = async () => {
+    // Implementation
+  };
+
   const AddData = async () => {
     const db = getDatabase(app);
     const newDoc = push(ref(db, "missions"));

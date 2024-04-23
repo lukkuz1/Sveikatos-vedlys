@@ -10,6 +10,20 @@ const Mission: React.FC = () => {
   const [mission, setMission] = useState<MissionInterface | null>(null);
   const healthMissionController = HealthMissionController();
 
+
+
+  const OpenDeletePage = async () => {
+    // Implementation
+  };
+
+  const OpenEditPage = async () => {
+    // Implementation
+  };
+
+  const DisplayMissionPage = async () => {
+    // Implementation
+  };
+
   useEffect(() => {
     const fetchMission = async () => {
       // Check if id exists before calling the controller method

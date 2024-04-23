@@ -2,9 +2,30 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import HealthMissionController from "../../controllers/Administrator/Health_mission_controller";
 import { MissionInterface } from '../../models/HealthyMission';
-import './Missions.css'; // Import the CSS file
+import './Missions.css';
 
 const Missions: React.FC = () => {
+
+  const DisplayHealthMissions = async () => {
+    // Implementation
+  };
+
+  const SelectHealthPage = async () => {
+    // Implementation
+  };
+
+  const OpenMissionAdd = async () => {
+    // Implementation
+  };
+
+  const ChooseViewMission = async () => {
+    // Implementation
+  };
+
+
+
+
+
   const [missions, setMissions] = useState<MissionInterface []>([]);
   const healthMissionController = HealthMissionController();
 
