@@ -1,13 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, NavLink, Routes } from 'react-router-dom'; // Importing NavLink from react-router-dom
 import './App.css';
-import Login from './app/Login/Login';
-import Register from './app/Register/Register'; // Assuming you have a Register component
-import Missions from './app/Missions/Missions';
-import MissionAdd from './app/Missions/add/MissionAdd';
-import Mission from './app/Missions/[id]/Mission';
-import MissionRemove from './app/Missions/[id]/remove/MissionRemove';
-import MissionUpdate from './app/Missions/[id]/update/MissionUpdate';
+import Login from './views/Login/Login';
+import Register from './views/Register/Register'; // Assuming you have a Register component
+import Missions from './views/Missions/Missions';
+import MissionAdd from './views/Missions/add/MissionAdd';
+import Mission from './views/Missions/[id]/Mission';
+import MissionRemove from './views/Missions/[id]/remove/MissionRemove';
+import MissionUpdate from './views/Missions/[id]/update/MissionUpdate';
 
 function App() {
   let signedIn = true; // Change this to true or false to see different button sets

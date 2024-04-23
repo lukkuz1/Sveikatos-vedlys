@@ -4,6 +4,7 @@ import { getDatabase, ref, set, get } from 'firebase/database';
 import { app } from '../../../../services/firebase';
 import Mission from '../Mission';
 import './MissionUpdate.css'; // Import the CSS file
+import { MissionInterface } from '../../../../models/HealthyMission';
 
 enum MissionType {
   Type1 = "sporto",
@@ -18,8 +19,8 @@ enum MissionDuration {
 
 const MissionUpdate: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const [mission, setMission] = useState<Mission | null>(null);
-  const [inputValues, setInputValues] = useState<Mission>({ id: '', missionDescription: '', missionType: '', missionDuration: '' });
+  const [mission, setMission] = useState<MissionInterface | null>(null);
+  const [inputValues, setInputValues] = useState<MissionInterface>({ id: '', missionDescription: '', missionType: '', missionDuration: '' });
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
   useEffect(() => {

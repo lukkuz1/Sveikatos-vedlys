@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Colors from '../../lib/Colors/Colors';
-import EntryButton from '../../components/EntryButton';
-import EntryInputField from '../../components/EntryInputField';
+import EntryButton from '../../div-components/EntryButton';
+import EntryInputField from '../../div-components/EntryInputField';
+import { NavLink } from 'react-router-dom';
 
-export default function Register() {
+export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [number, setNumber] = useState('');
@@ -14,7 +15,7 @@ export default function Register() {
     // Your side effect code here if needed
   }, []); // Empty dependency array to run effect only once
 
-  const handleSignUp = async () => {
+  const handleSignIn = async () => {
     // Your sign-up logic here
   };
 
@@ -22,7 +23,7 @@ export default function Register() {
 
   return (
     <div style={styles.container}>
-        <h1>Create an account</h1>
+        <h1 >Login</h1>
         <EntryInputField
           headerText=""
           placeholderText="Enter Your Email"
@@ -32,32 +33,18 @@ export default function Register() {
         />
         <EntryInputField
           headerText=""
-          placeholderText="Enter Your Phone Number"
-          isPassword={false}
-          margin={[0, 10, 0, 0]}
-          onChangeText={(text) => setNumber(text)}
-        />
-        <EntryInputField
-          headerText=""
           placeholderText="Enter Your Password"
           isPassword={true}
           margin={[0, 10, 0, 0]}
           onChangeText={(text) => setPassword(text)}
         />
         <EntryButton
-          text="Sign Up"
+          text="Sign In"
           textColor={Colors.White}
           buttonColor={Colors.LightBlue}
           margin={[20, 20, 0, 0]}
-          onPress={handleSignUp}
+          onPress={handleSignIn}
         />
-
-        <div style={{ height: 25, width: 310, display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-          <p style={{ color: Colors.EntryLighterWhite, fontSize: 14, fontWeight: "400" }}>Already have an account ?</p>
-          <button style={{ backgroundColor: 'transparent', border: 'none', cursor: 'pointer' }} onClick={() => {}}>
-            <p style={{ color: Colors.EntryLighterWhite, fontSize: 14, fontWeight: "600", marginLeft: 5 }}>Log in!</p>
-          </button>
-        </div>
     </div>
   );
 }
