@@ -8,6 +8,11 @@ import MissionAdd from './views/Missions/add/MissionAdd';
 import Mission from './views/Missions/[id]/Mission';
 import MissionRemove from './views/Missions/[id]/remove/MissionRemove';
 import MissionUpdate from './views/Missions/[id]/update/MissionUpdate';
+import { RenderMissionAddPage } from './controllers/Administrator/Navigation_router_admin';
+import { RenderMissionPage } from './controllers/Administrator/Navigation_router_admin';
+import { RenderMissionEditPage } from './controllers/Administrator/Navigation_router_admin';
+import { RenderMissionRemovePage } from './controllers/Administrator/Navigation_router_admin';
+import { RenderMissionsPage } from './controllers/Administrator/Navigation_router_admin';
 
 function App() {
   let signedIn = true;
@@ -51,11 +56,11 @@ export default function MainApp() {
          
         <Route path="/login" Component={Login} />
         <Route path="/register" Component={Register} />
-        <Route path="/missions" Component={Missions} />
-        <Route path="/missions/add" Component={MissionAdd} />
-        <Route path="/missions/:id" Component={Mission} />
-        <Route path="/missions/:id/remove" Component={MissionRemove} />
-        <Route path="/missions/:id/update" Component={MissionUpdate} />
+        <Route path="/missions" Component={RenderMissionsPage} />
+        <Route path="/missions/add" Component={RenderMissionAddPage} />
+        <Route path="/missions/:id" Component={RenderMissionPage} />
+        <Route path="/missions/:id/remove" Component={RenderMissionRemovePage} />
+        <Route path="/missions/:id/update" Component={RenderMissionEditPage} />
         </Routes>
         
       </div>
