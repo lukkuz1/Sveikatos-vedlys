@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { getDatabase, ref, set, get } from 'firebase/database';
 import { app } from '../../../../services/firebase';
 import Mission from '../Mission';
@@ -18,57 +18,53 @@ enum MissionDuration {
 }
 
 const MissionUpdate: React.FC = () => {
+  const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const [mission, setMission] = useState<MissionInterface | null>(null);
   const [inputValues, setInputValues] = useState<MissionInterface>({ id: '', missionDescription: '', missionType: '', missionDuration: '' });
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
   const DisplayMissionEdit= async () => {
-    // Implementation
-  };
-
-  const SubmitMissionEdit = async () => {
-    // Implementation
-  };
-
-  useEffect(() => {
-    const fetchMission = async () => {
-      try {
-        const db = getDatabase(app);
-        const missionRef = ref(db, `missions/${id}`);
-        const snapshot = await get(missionRef);
-
-        if (snapshot.exists()) {
-          setMission({ id, ...snapshot.val() });
-          setInputValues({ id, ...snapshot.val() });
-        } else {
-          console.log('Mission not found');
+    useEffect(() => {
+      const fetchMission = async () => {
+        try {
+          const db = getDatabase(app);
+          const missionRef = ref(db, `missions/${id}`);
+          const snapshot = await get(missionRef);
+  
+          if (snapshot.exists()) {
+            setMission({ id, ...snapshot.val() });
+            setInputValues({ id, ...snapshot.val() });
+          } else {
+            console.log('Mission not found');
+          }
+        } catch (error) {
+          console.error('Error fetching mission:', error);
         }
-      } catch (error) {
-        console.error('Error fetching mission:', error);
-      }
-    };
+      };
+  
+      fetchMission();
+    }, [id]);
+  };
+  DisplayMissionEdit();
 
-    fetchMission();
-  }, [id]);
+
+  
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setInputValues({ ...inputValues, [name]: value });
   };
 
-  const handleUpdate = async () => {
+  const SubmitMissionEdit = async () => {
     try {
       const db = getDatabase(app);
       const missionRef = ref(db, `missions/${id}`);
       await set(missionRef, inputValues);
-      setSuccessMessage('Sėkmingai redaguotas iššūkis!');
-      // Hide success message after 3 seconds
-      setTimeout(() => {
-        setSuccessMessage(null);
-      }, 2000);
+      alert("Iššūkis sėkmingai redaguotas!");
+      navigate("/missions");
     } catch (error) {
-      console.error('Error updating mission:', error);
+      alert("Klaida: " + error);
     }
   };
 
@@ -101,7 +97,7 @@ const MissionUpdate: React.FC = () => {
             ))}
           </select>
         </div>
-        <button className="button" onClick={handleUpdate}>Redaguoti</button>
+        <button className="button" onClick={SubmitMissionEdit}>Redaguoti</button>
       </div>
     </div>
   );

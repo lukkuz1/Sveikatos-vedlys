@@ -1,41 +1,39 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import HealthMissionController from "../../controllers/Administrator/Health_mission_controller";
 import { MissionInterface } from '../../models/HealthyMission';
 import './Missions.css';
 
 const Missions: React.FC = () => {
-
-  const DisplayHealthMissions = async () => {
-    // Implementation
-  };
-
-  const SelectHealthPage = async () => {
-    // Implementation
-  };
-
-  const OpenMissionAdd = async () => {
-    // Implementation
-  };
-
-  const ChooseViewMission = async () => {
-    // Implementation
-  };
-
-
-
-
-
-  const [missions, setMissions] = useState<MissionInterface []>([]);
   const healthMissionController = HealthMissionController();
+  const [missions, setMissions] = useState<MissionInterface[]>([]);
 
-  useEffect(() => {
-    const fetchMissions = async () => {
-      const missionsData = await healthMissionController.GetHealthMissions();
-      setMissions(missionsData);
-    };
-    fetchMissions();
-  }, [healthMissionController]);
+  const DisplayMissions = () =>{
+    useEffect(() => {
+      const fetchMissions = async () => {
+        const missionsData = await healthMissionController.GetHealthMissions();
+        setMissions(missionsData);
+      };
+      fetchMissions();
+    }, [healthMissionController]);
+  }
+
+  DisplayMissions();
+  
+
+  const SelectHealthPage = (missionId: string) => {
+    return <Link to={`/missions/${missionId}`}>Peržiūrėti</Link>;
+  };
+
+  const OpenMissionAdd = () => {
+    return (
+      <NavLink to="/missions/add">
+        <button>Pridėti misiją</button>
+      </NavLink>
+    );
+  };
+
+  
 
   return (
     <div className="all">
@@ -48,6 +46,7 @@ const Missions: React.FC = () => {
               <th>Description</th>
               <th>Type</th>
               <th>Duration</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -57,13 +56,12 @@ const Missions: React.FC = () => {
                 <td>{mission.missionDescription}</td>
                 <td>{mission.missionType}</td>
                 <td>{mission.missionDuration}</td>
-                <td>
-                  <Link to={`/missions/${mission.id}`}>Peržiūrėti</Link>
-                </td>
+                <td>{SelectHealthPage(mission.id)}</td>
               </tr>
             ))}
           </tbody>
         </table>
+        {OpenMissionAdd()}
       </div>
     </div>
   );

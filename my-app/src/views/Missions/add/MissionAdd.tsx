@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { getDatabase, ref, set, push } from "firebase/database";
+import { useParams, useNavigate } from "react-router-dom";
 import { app } from "../../../services/firebase";
 import "./MissionAdd.css";
 
@@ -15,6 +16,7 @@ enum MissionDuration {
 }
 
 export default function MissionAdd() {
+  const navigate = useNavigate();
   let [inputValue1, setInputValue1] = useState("");
   let [inputValue2, setInputValue2] = useState<MissionType>(MissionType.Type1);
   let [inputValue3, setInputValue3] = useState<MissionDuration>(MissionDuration.Duration1);
@@ -30,15 +32,10 @@ export default function MissionAdd() {
     setInputValue3(e.target.value as MissionDuration);
   };
 
-  const DisplayMissionAdd= async () => {
-    // Implementation
-  };
+
+  
 
   const AddMission = async () => {
-    // Implementation
-  };
-
-  const AddData = async () => {
     const db = getDatabase(app);
     const newDoc = push(ref(db, "missions"));
     set(newDoc, {
@@ -48,6 +45,7 @@ export default function MissionAdd() {
     })
       .then(() => {
         alert("Iššūkis sėkmingai pridėtas!");
+        navigate("/missions");
       })
       .catch((error) => {
         alert("Klaida: " + error);
@@ -71,7 +69,7 @@ export default function MissionAdd() {
           <option value={MissionDuration.Duration2}>savaitinė</option>
         </select>
         <br />
-        <button onClick={AddData}>Pridėti</button>
+        <button onClick={AddMission}>Pridėti</button>
       </div>
     </div>
   );
