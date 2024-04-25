@@ -1,6 +1,7 @@
 
 import { getDatabase, ref, get, set, push, remove } from "firebase/database";
 import { app } from "../services/firebase";
+import React, { useEffect, useState } from 'react';
 
 export interface MissionInterface {
   id: string;
@@ -19,6 +20,33 @@ export enum MissionDuration {
   Duration1 = "diena",
   Duration2 = "savaitė",
 }
+
+export const DisplayMissionEdit = async (
+  id: any,
+  setMission: (mission: MissionInterface | null) => void,
+  setInputValues: (values: MissionInterface) => void
+): Promise<void> => {
+  useEffect(() => {
+    const fetchMission = async () => {
+      try {
+        const db = getDatabase(app);
+        const missionRef = ref(db, `missions/${id}`);
+        const snapshot = await get(missionRef);
+
+        if (snapshot.exists()) {
+          setMission({ id, ...snapshot.val() });
+          setInputValues({ id, ...snapshot.val() });
+        } else {
+          console.log('Mission not found');
+        }
+      } catch (error) {
+        console.error('Error fetching mission:', error);
+      }
+    };
+
+    fetchMission();
+  }, [id]);
+};
 
 export async function fetchMissions(): Promise<MissionInterface[]> {
   try {
@@ -74,6 +102,7 @@ export async function addMission(
       missionType,
       missionDuration,
     });
+    alert("Iššūkis sėkmingai pridėtas!");
   } catch (error) {
     console.error("Error adding mission:", error);
     throw error;
@@ -85,6 +114,7 @@ export async function deleteMission(id: string): Promise<void> {
     const db = getDatabase(app);
     const missionRef = ref(db, `missions/${id}`);
     await remove(missionRef);
+    alert("Iššūkis sėkmingai ištrintas!");
   } catch (error) {
     console.error("Error deleting mission:", error);
     throw error;
@@ -96,9 +126,11 @@ export async function updateMission(
   missionData: Partial<MissionInterface>
 ): Promise<void> {
   try {
+    console.log(missionData.missionDescription);
     const db = getDatabase(app);
     const missionRef = ref(db, `missions/${id}`);
     await set(missionRef, missionData);
+    alert("Iššūkis sėkmingai redaguotas!");
   } catch (error) {
     console.error("Error updating mission:", error);
     throw error;

@@ -3,6 +3,7 @@ import { getDatabase, ref, set, push } from "firebase/database";
 import { useParams, useNavigate } from "react-router-dom";
 import { app } from "../../../services/firebase";
 import "./MissionAdd.css";
+import { addMission } from "../../../models/HealthyMission";
 
 enum MissionType {
   Type1 = "sporto",
@@ -20,6 +21,7 @@ export default function MissionAdd() {
   let [inputValue1, setInputValue1] = useState("");
   let [inputValue2, setInputValue2] = useState<MissionType>(MissionType.Type1);
   let [inputValue3, setInputValue3] = useState<MissionDuration>(MissionDuration.Duration1);
+  
   const handleInputChange1 = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue1(e.target.value);
   };
@@ -33,23 +35,14 @@ export default function MissionAdd() {
   };
 
 
-  
-
   const AddMission = async () => {
-    const db = getDatabase(app);
-    const newDoc = push(ref(db, "missions"));
-    set(newDoc, {
-      missionDescription: inputValue1,
-      missionType: inputValue2,
-      missionDuration: inputValue3,
-    })
-      .then(() => {
-        alert("Iššūkis sėkmingai pridėtas!");
-        navigate("/missions");
-      })
-      .catch((error) => {
-        alert("Klaida: " + error);
-      });
+    try{
+      await addMission(inputValue1, inputValue2, inputValue3)
+      navigate("/missions");
+    }
+    catch(error){
+      alert("Klaida "+ error)
+    }
   };
 
   return (

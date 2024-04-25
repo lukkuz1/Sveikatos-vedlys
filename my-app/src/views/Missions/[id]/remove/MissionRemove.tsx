@@ -3,25 +3,17 @@ import { getDatabase, ref, remove } from "firebase/database";
 import { useParams, useNavigate } from "react-router-dom";
 import { app } from "../../../../services/firebase";
 import './MissionRemove.css';
+import { deleteMission } from "../../../../models/HealthyMission";
 
 const MissionRemove = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
-  const DisplayMissionDelete= async () => {
-    // Implementation
-  };
 
-  const SubmitConfirmation = async () => {
-    // Implementation
-  };
 
-  const handleDelete = async () => {
+  const SubmitConfirmation = async (id: string) => {
     try {
-      const db = getDatabase(app);
-      const missionRef = ref(db, `missions/${id}`);
-      await remove(missionRef);
-      alert("Iššūkis sėkmingai ištrintas!");
+      await deleteMission(id);
       navigate("/missions");
     } catch (error) {
       console.error("Error deleting mission:", error);
@@ -32,10 +24,11 @@ const MissionRemove = () => {
     <div className="remove">
       <div className="remove-1">
         <h2>Iššūkio ištrinimas</h2>
-        <button onClick={handleDelete}>Ištrinti</button>
+        <button onClick={() => id && SubmitConfirmation(id)}>Ištrinti</button>
       </div>
     </div>
   );
 };
+
 
 export default MissionRemove;
