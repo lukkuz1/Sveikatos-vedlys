@@ -41,7 +41,7 @@ export default function HealthMissionController() {
     return await fetchMissions();
   };
 
-  const GetHealthMission = async (id: string): Promise<MissionInterface | null> => {
+  const GetMission = async (id: string): Promise<MissionInterface | null> => {
     return await fetchMissionById(id);
   };
 
@@ -54,6 +54,6 @@ export default function HealthMissionController() {
     ValidateMission,
     ValidateEdit,
     GetHealthMissions,
-    GetHealthMission,
+    GetMission,
   };
 }

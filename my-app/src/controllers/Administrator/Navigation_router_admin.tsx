@@ -1,7 +1,7 @@
-import Missions from '../../views/Missions/Missions';
-import MissionAdd from '../../views/Missions/add/MissionAdd';
-import Mission from '../../views/Missions/[id]/Mission';
-import MissionRemove from '../../views/Missions/[id]/remove/MissionRemove';
+import Missions from '../../views/Missions/Health_missions_view_page';
+import MissionAdd from '../../views/Missions/add/Health_mission_add_page';
+import Mission from '../../views/Missions/[id]/Health_mission_view_page';
+import MissionRemove from '../../views/Missions/[id]/remove/Health_mission_delete_page';
 import MissionUpdate from '../../views/Missions/[id]/update/MissionUpdate';
 
 export function RenderMissionPage() {

@@ -9,11 +9,51 @@ const MissionRemove = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
+  const VerifyConfirmation = async () => {
+    try{
+      
+    }
+    catch(error){
+      alert("Klaida "+ error)
+    }
+  };
+
+  const DeleteMissionData = async (id: string) => {
+    try{
+      await deleteMission(id);
+      await GetMissionsList();
+      await DisplayAllMissionsPage();
+    }
+    catch(error){
+      alert("Klaida "+ error)
+    }
+  };
+
+  const GetMissionsList = async () => {
+    try{
+      
+    }
+    catch(error){
+      alert("Klaida "+ error)
+    }
+  };
+
+  const DisplayAllMissionsPage = async () => {
+    try{
+      navigate("/missions");
+    }
+    catch(error){
+      alert("Klaida "+ error)
+    }
+  };
+
+
 
 
   const SubmitConfirmation = async (id: string) => {
     try {
-      await deleteMission(id);
+      await VerifyConfirmation();
+      await DeleteMissionData(id);
       navigate("/missions");
     } catch (error) {
       console.error("Error deleting mission:", error);

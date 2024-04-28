@@ -13,7 +13,7 @@ const Mission: React.FC = () => {
     useEffect(() => {
       const fetchMission = async () => {
         if (id) {
-          const missionData = await healthMissionController.GetHealthMission(id);
+          const missionData = await healthMissionController.GetMission(id);
           setMission(missionData);
         }
       };

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getDatabase, ref, set, get } from 'firebase/database';
 import { app } from '../../../../services/firebase';
-import Mission from '../Mission';
+import Mission from '../Health_mission_view_page';
 import './MissionUpdate.css'; // Import the CSS file
 import { MissionInterface } from '../../../../models/HealthyMission';
 import { updateMission } from '../../../../models/HealthyMission';

@@ -21,7 +21,7 @@ const Missions: React.FC = () => {
   DisplayMissions();
   
 
-  const SelectHealthPage = (missionId: string) => {
+  const ChooseViewMission = (missionId: string) => {
     return <Link to={`/missions/${missionId}`}>Peržiūrėti</Link>;
   };
 
@@ -56,7 +56,7 @@ const Missions: React.FC = () => {
                 <td>{mission.missionDescription}</td>
                 <td>{mission.missionType}</td>
                 <td>{mission.missionDuration}</td>
-                <td>{SelectHealthPage(mission.id)}</td>
+                <td>{ChooseViewMission(mission.id)}</td>
               </tr>
             ))}
           </tbody>
