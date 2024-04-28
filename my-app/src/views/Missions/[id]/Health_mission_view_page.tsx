@@ -8,8 +8,7 @@ const Mission: React.FC = () => {
   const [mission, setMission] = useState<MissionInterface | null>(null);
   const healthMissionController = HealthMissionController();
 
-  const DisplayHealthMission =() =>
-  {
+
     useEffect(() => {
       const fetchMission = async () => {
         if (id) {
@@ -19,8 +18,8 @@ const Mission: React.FC = () => {
       };
       fetchMission();
     }, [id, healthMissionController]);
-  }
-  DisplayHealthMission();
+  
+
 
   
 
@@ -29,7 +28,7 @@ const Mission: React.FC = () => {
   }
 
   const OpenDeletePage = (missionId: string) => {
-    return <Link to={`/missions/${missionId}/remove`}>Pašalinti</Link>;
+    return <Link to={{pathname:`/missions/${missionId}/remove`}}>Pašalinti</Link>;
   };
 
   const OpenEditPage = (missionId: string) => {

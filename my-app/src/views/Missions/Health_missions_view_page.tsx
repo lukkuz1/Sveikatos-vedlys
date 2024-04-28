@@ -8,7 +8,7 @@ const Missions: React.FC = () => {
   const healthMissionController = HealthMissionController();
   const [missions, setMissions] = useState<MissionInterface[]>([]);
 
-  const DisplayMissions = () =>{
+
     useEffect(() => {
       const fetchMissions = async () => {
         const missionsData = await healthMissionController.GetHealthMissions();
@@ -16,9 +16,9 @@ const Missions: React.FC = () => {
       };
       fetchMissions();
     }, [healthMissionController]);
-  }
 
-  DisplayMissions();
+
+
   
 
   const ChooseViewMission = (missionId: string) => {
