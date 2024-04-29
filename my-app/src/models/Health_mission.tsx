@@ -3,28 +3,27 @@ import { getDatabase, ref, get, set, push, remove } from "firebase/database";
 import { app } from "../services/firebase";
 import React, { useEffect, useState } from 'react';
 
-export interface MissionInterface {
+export interface Health_mission {
   id: string;
   missionDescription: string;
   missionType: string;
   missionDuration: string;
 }
 
-export enum MissionType {
-  Type1 = "sporto",
+export enum Mission_type {
   Type2 = "miego",
   Type3 = "mitybos",
 }
 
-export enum MissionDuration {
+export enum Mission_duration {
   Duration1 = "diena",
   Duration2 = "savaitė",
 }
 
 export const DisplayMissionEdit = async (
   id: any,
-  setMission: (mission: MissionInterface | null) => void,
-  setInputValues: (values: MissionInterface) => void
+  setMission: (mission: Health_mission | null) => void,
+  setInputValues: (values: Health_mission) => void
 ): Promise<void> => {
   useEffect(() => {
     const fetchMission = async () => {
@@ -48,7 +47,7 @@ export const DisplayMissionEdit = async (
   }, [id]);
 };
 
-export async function fetchMissions(): Promise<MissionInterface[]> {
+export async function GetHealthMissionsData(): Promise<Health_mission[]> {
   try {
     const db = getDatabase(app);
     const dbRef = ref(db, "missions");
@@ -56,7 +55,7 @@ export async function fetchMissions(): Promise<MissionInterface[]> {
 
     if (snapshot.exists()) {
       const data = snapshot.val();
-      const missions: MissionInterface[] = Object.keys(data).map((key) => ({
+      const missions: Health_mission[] = Object.keys(data).map((key) => ({
         id: key,
         ...data[key],
       }));
@@ -71,14 +70,14 @@ export async function fetchMissions(): Promise<MissionInterface[]> {
   }
 }
 
-export async function fetchMissionById(id: string): Promise<MissionInterface | null> {
+export async function GetHealthMissionData(id: string): Promise<Health_mission | null> {
   try {
     const db = getDatabase(app);
     const missionRef = ref(db, `missions/${id}`);
     const snapshot = await get(missionRef);
 
     if (snapshot.exists()) {
-      return { id, ...snapshot.val() } as MissionInterface;
+      return { id, ...snapshot.val() } as Health_mission;
     } else {
       console.log('Mission not found');
       return null;
@@ -89,18 +88,14 @@ export async function fetchMissionById(id: string): Promise<MissionInterface | n
   }
 }
 
-export async function addMission(
-  missionDescription: string,
-  missionType: string,
-  missionDuration: string
-): Promise<void> {
+export async function AddHealthMission(missionData: Health_mission): Promise<void> {
   try {
     const db = getDatabase(app);
     const newDoc = push(ref(db, "missions"));
     await set(newDoc, {
-      missionDescription,
-      missionType,
-      missionDuration,
+      missionDescription: missionData.missionDescription,
+      missionType: missionData.missionType,
+      missionDuration: missionData.missionDuration,
     });
     alert("Iššūkis sėkmingai pridėtas!");
   } catch (error) {
@@ -109,24 +104,22 @@ export async function addMission(
   }
 }
 
-export async function deleteMission(id: string): Promise<void> {
+export async function DeleteHealthMissionData(id: string): Promise<void> {
   try {
     const db = getDatabase(app);
     const missionRef = ref(db, `missions/${id}`);
     await remove(missionRef);
-    alert("Iššūkis sėkmingai ištrintas!");
   } catch (error) {
     console.error("Error deleting mission:", error);
     throw error;
   }
 }
 
-export async function updateMission(
+export async function EditHealthMissionData(
   id: string,
-  missionData: Partial<MissionInterface>
+  missionData: Partial<Health_mission>
 ): Promise<void> {
   try {
-    console.log(missionData.missionDescription);
     const db = getDatabase(app);
     const missionRef = ref(db, `missions/${id}`);
     await set(missionRef, missionData);

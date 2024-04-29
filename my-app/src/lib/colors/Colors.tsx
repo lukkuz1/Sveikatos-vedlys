@@ -2,22 +2,22 @@ export default {
     // Global
     BackgroundGradientUpper: 'rgba(37, 76, 113, 1)',
     BackgroundGradientLower: 'rgba(73, 137, 110, 1)',
-  
+
     // Entry Screens
     EntryDarkerWhite: 'rgba(255, 255, 255, 0.70)',
     EntryLighterWhite: 'rgba(255, 255, 255, 0.90)',
-  
+
     // Main Screens
     MainText: 'rgba(255, 255, 255, 1)',
     TransparentRectangle: 'rgba(255, 255, 255, 0.18)',
     TransparentRectangleBorder: 'rgba(255, 255, 255, 0.4)',
     ProgressBarFill: 'rgba(60, 200, 255, 1)',
     ProgressBarBackground: 'rgba(230, 230, 230, 1)',
-  
+
     // Tabs
     TabBarActiveTint: 'rgba(255, 255, 255, 1)',
     TabBarInactiveTint: 'rgba(255, 255, 255, 0.5)',
-  
+
     // Simple Colors
     Black: 'rgba(0, 0, 0, 1)',
     White: 'rgba(255, 255, 255, 1)',

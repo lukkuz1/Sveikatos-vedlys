@@ -1,24 +1,24 @@
-import Missions from '../../views/Missions/Health_missions_view_page';
-import MissionAdd from '../../views/Missions/add/Health_mission_add_page';
-import Mission from '../../views/Missions/[id]/Health_mission_view_page';
-import MissionRemove from '../../views/Missions/[id]/remove/Health_mission_delete_page';
-import MissionUpdate from '../../views/Missions/[id]/update/MissionUpdate';
+import HealthMission from '../../views/Admin/Health_mission_view_page';
+import HealthMissions from '../../views/Admin/Health_missions_view_page';
+import HealthMissionAdd from '../../views/Admin/Health_mission_add_page';
+import HealthMissionEdit from '../../views/Admin/Health_mission_edit_page';
+import { JsxElement } from 'typescript';
 
-export function RenderMissionPage() {
-    return <Mission />;
+export class Navigation_router_admin {
+  static RenderHealthMissionPage() {
+    return <HealthMission />;
   }
-  export function RenderMissionsPage() {
-    return <Missions />;
+  static RenderHealthMissionsPage() {
+    return <HealthMissions />;
   }
-  
-  export function RenderMissionAddPage() {
-    return <MissionAdd />;
+
+  static RenderHealthMissionAddPage() {
+    return <HealthMissionAdd />;
   }
-  
-  export function RenderMissionEditPage() {
-    return <MissionUpdate />;
+
+  static RenderHealthMissionEditPage() {
+    return <HealthMissionEdit />;
   }
-  
-  export function RenderMissionRemovePage() {
-    return <MissionRemove />;
-  }
+}
+
+export default Navigation_router_admin;

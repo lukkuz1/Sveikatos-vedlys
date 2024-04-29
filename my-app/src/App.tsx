@@ -1,25 +1,16 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, NavLink, Routes } from 'react-router-dom'; // Importing NavLink from react-router-dom
 import './App.css';
-import Login from './views/Login/Login';
-import Register from './views/Register/Register';
-import Missions from './views/Missions/Health_missions_view_page';
-import MissionAdd from './views/Missions/add/Health_mission_add_page';
-import Mission from './views/Missions/[id]/Health_mission_view_page';
-import MissionRemove from './views/Missions/[id]/remove/Health_mission_delete_page';
-import MissionUpdate from './views/Missions/[id]/update/MissionUpdate';
-import { RenderMissionAddPage } from './controllers/Administrator/Navigation_router_admin';
-import { RenderMissionPage } from './controllers/Administrator/Navigation_router_admin';
-import { RenderMissionEditPage } from './controllers/Administrator/Navigation_router_admin';
-import { RenderMissionRemovePage } from './controllers/Administrator/Navigation_router_admin';
-import { RenderMissionsPage } from './controllers/Administrator/Navigation_router_admin';
+import Navigation_router_admin from './controllers/Administrator/Navigation_router_admin';
+import Home_admin from './views/Admin/Home_admin';
+
 
 function App() {
   let signedIn = true;
   let isAdmin = true;
   return (
     <div className="App">
-      <p>Sveikatos vedlys</p>
+      <p><a href='/'>Sveikatos vedlys</a></p>
 
       {!signedIn && (
         <>
@@ -35,13 +26,10 @@ function App() {
 
       {signedIn && isAdmin && (
         <>
-        <NavLink to="/missions">
-          <button>Misijos</button>
-        </NavLink>
-        
+          <NavLink to="/admin">
+            <button>Administratoriaus sąsaja</button>
+          </NavLink>
         </>
-        
-        
       )}
     </div>
   );
@@ -53,16 +41,14 @@ export default function MainApp() {
       <div>
         <App />
         <Routes>
-         
-        <Route path="/login" Component={Login} />
-        <Route path="/register" Component={Register} />
-        <Route path="/missions" Component={RenderMissionsPage} />
-        <Route path="/missions/add" Component={RenderMissionAddPage} />
-        <Route path="/missions/:id" Component={RenderMissionPage} />
-        <Route path="/missions/:id/remove" Component={RenderMissionRemovePage} />
-        <Route path="/missions/:id/update" Component={RenderMissionEditPage} />
+          {/*<Route path="/login" Component={Login} />
+          <Route path="/register" Component={Register} />*/}
+          <Route path="/admin" Component={Home_admin} />
+          <Route path="/admin/missions" Component={Navigation_router_admin.RenderHealthMissionsPage} />
+          <Route path="/admin/missions/add" Component={Navigation_router_admin.RenderHealthMissionAddPage} />
+          <Route path="/admin/missions/:id" Component={Navigation_router_admin.RenderHealthMissionPage} />
+          <Route path="/admin/missions/:id/edit" Component={Navigation_router_admin.RenderHealthMissionEditPage} />
         </Routes>
-        
       </div>
     </Router>
   );

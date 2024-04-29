@@ -1,59 +1,41 @@
-
 import {
-  fetchMissions,
-  fetchMissionById,
-  addMission,
-  deleteMission,
-  updateMission,
-  MissionInterface
-} from "../../models/HealthyMission";
+  GetHealthMissionsData,
+  GetHealthMissionData,
+  AddHealthMission,
+  DeleteHealthMissionData,
+  EditHealthMissionData,
+  Health_mission
+} from "../../models/Health_mission";
 
-export default function HealthMissionController() {
-  const VerifyMission = async () => {
-    // Implementation
+export default function Health_mission_controller() {
+  const GetHealthMissions = async (): Promise<Health_mission[]> => {
+    return await GetHealthMissionsData();
   };
 
-  const OpenMissionDelete = async () => {
-    // Implementation
+  const GetHealthMission = async (id: string): Promise<Health_mission | null> => {
+    return await GetHealthMissionData(id);
   };
 
-  const VerifyConfirmation = async () => {
-    // Implementation
+  const VerifyHealthMissionData = (missionData: Health_mission): number => {
+    return ValidateHealthMissionData(missionData);
   };
 
-  const VerifyEdit = async () => {
-    // Implementation
-  };
+  const ValidateHealthMissionData = (missionData: Health_mission): number => {
+    if (missionData.missionDescription === "") {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
 
-  const VerifyUserDeleteConfirmation = async () => {
-    // Implementation
-  };
-
-  const ValidateMission = async () => {
-    // Implementation
-  };
-
-  const ValidateEdit = async () => {
-    // Implementation
-  };
-
-  const GetHealthMissions = async (): Promise<MissionInterface[]> => {
-    return await fetchMissions();
-  };
-
-  const GetMission = async (id: string): Promise<MissionInterface | null> => {
-    return await fetchMissionById(id);
-  };
+  const DeleteHealthMission = (id: string) => {
+    DeleteHealthMissionData(id);
+  }
 
   return {
-    VerifyMission,
-    OpenMissionDelete,
-    VerifyConfirmation,
-    VerifyEdit,
-    VerifyUserDeleteConfirmation,
-    ValidateMission,
-    ValidateEdit,
     GetHealthMissions,
-    GetMission,
+    GetHealthMission,
+    VerifyHealthMissionData,
+    DeleteHealthMission
   };
 }

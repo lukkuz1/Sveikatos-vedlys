@@ -19,6 +19,10 @@ p {
   margin-bottom: 20px;
 }
 
+a {
+  text-decoration: none;
+}
+
 button {
   background-color: #007bff;
   color: #fff;
