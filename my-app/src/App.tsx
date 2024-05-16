@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, NavLink, Routes } from 'react-router-dom'; // Importing NavLink from react-router-dom
 import './App.css';
-import Navigation_router_admin from './controllers/Administrator/Navigation_router_admin';
+import Navigation_router_admin from './controllers/Admin/Navigation_router_admin';
 import Home_admin from './views/Admin/Home_admin';
 
 

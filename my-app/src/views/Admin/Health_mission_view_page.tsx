@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
-import Health_mission_controller from "../../controllers/Administrator/Health_mission_controller";
+import Health_mission_controller from "../../controllers/Admin/Health_mission_controller";
 import { Health_mission } from '../../models/Health_mission';
 
 export default function Health_mission_view_page() {
