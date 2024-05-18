@@ -8,6 +8,11 @@ import Home_admin from './views/Admin/Home_admin';
 function App() {
   let signedIn = true;
   let isAdmin = true;
+  let isHealthy = false;
+  let isConsultant = false;
+  let isGuest = false;
+  let isUser = false;
+
   return (
     <div className="App">
       <p><a href='/'>Sveikatos vedlys</a></p>
