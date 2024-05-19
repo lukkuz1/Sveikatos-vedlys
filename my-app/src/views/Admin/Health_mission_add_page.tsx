@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Health_mission_controller from "../../controllers/Administrator/Health_mission_controller";
+import Health_mission_controller from "../../controllers/Admin/Health_mission_controller";
 import { AddHealthMission, Health_mission } from '../../models/Health_mission';
 import "./MissionAdd.css";
 
