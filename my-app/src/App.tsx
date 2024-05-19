@@ -4,12 +4,17 @@ import './App.css';
 import Navigation_router_admin from './controllers/Admin/Navigation_router_admin';
 import Home_admin from './views/Admin/Home_admin';
 
+import Home_consultant from './views/Consultant/Home_consultant';
+import Navigation_router_consultant from './controllers/Consultant/Navigation_router_consultant';
+
+import Home_healthy from './views/User/Home_healthy';
+import Navigation_router_health from './controllers/Healthy/Navigation_router_health';
 
 function App() {
   let signedIn = true;
   let isAdmin = true;
-  let isHealthy = false;
-  let isConsultant = false;
+  let isHealthy = true;
+  let isConsultant = true;
   let isGuest = false;
   let isUser = false;
 
@@ -36,6 +41,20 @@ function App() {
           </NavLink>
         </>
       )}
+      {signedIn && isConsultant && (
+        <>
+          <NavLink to="/consultant">
+            <button>Konsultanto sąsaja</button>
+          </NavLink>
+        </>
+      )}
+      {signedIn && isHealthy && (
+        <>
+          <NavLink to="/healthy">
+            <button>Sveikuolio sąsaja</button>
+          </NavLink>
+        </>
+      )}
     </div>
   );
 }
@@ -53,6 +72,16 @@ export default function MainApp() {
           <Route path="/admin/missions/add" Component={Navigation_router_admin.RenderHealthMissionAddPage} />
           <Route path="/admin/missions/:id" Component={Navigation_router_admin.RenderHealthMissionPage} />
           <Route path="/admin/missions/:id/edit" Component={Navigation_router_admin.RenderHealthMissionEditPage} />
+
+          {/* Consultant */}
+          <Route path="/consultant" Component={Home_consultant} />
+          <Route path="/consultant/consultations" Component={Navigation_router_consultant.RenderConsultations} />
+          <Route path="/consultant/consultation/:id" Component={Navigation_router_consultant.RenderConsultationPage} />
+          <Route path="/consultant/consultation/:id/reviews" Component={Navigation_router_consultant.RenderConsultationReviews} />
+
+          {/* Healthy */}
+          <Route path="/healthy" Component={Home_healthy} />
+          <Route path="/healthy/missions" Component={Navigation_router_health.RenderHealthMissionsPage} />
         </Routes>
       </div>
     </Router>

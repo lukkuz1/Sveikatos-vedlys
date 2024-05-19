@@ -17,7 +17,7 @@ enum MissionDuration {
 
 export default function MissionAdd() {
   const navigate = useNavigate();
-  const [mission, setMission] = useState<Health_mission>({ id: "", missionDescription: "", missionDuration: MissionDuration.Duration1, missionType: MissionType.Type1 });
+  const [mission, setMission] = useState<Health_mission>({ id: "", missionDescription: "", missionDuration: MissionDuration.Duration1, missionType: MissionType.Type1, missionStatus: "neįvykdyta" });
   const [descriptionEmpty, setDescriptionEmpty] = useState<boolean>(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
