@@ -22,7 +22,7 @@ export default function Health_mission_edit_page() {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const { state } = useLocation();
-  const [mission, setMission] = useState<Health_mission>({ id: "", missionDescription: "", missionDuration: MissionDuration.Duration1, missionType: MissionType.Type1 });
+  const [mission, setMission] = useState<Health_mission>({ id: "", missionDescription: "", missionDuration: MissionDuration.Duration1, missionType: MissionType.Type1, missionStatus: "neįvykdyta" });
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [descriptionEmpty, setDescriptionEmpty] = useState<boolean>(false);
 
@@ -32,7 +32,8 @@ export default function Health_mission_edit_page() {
         id: state.missionData.id,
         missionDescription: state.missionData.missionDescription,
         missionDuration: state.missionData.missionDuration,
-        missionType: state.missionData.missionType
+        missionType: state.missionData.missionType,
+        missionStatus: state.missionData.missionStatus
       }
       setMission(healthMissionTemp);
     }

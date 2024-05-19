@@ -1,10 +1,16 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
-export const Home_consultant: React.FC = () => {
+const Home_consultant: React.FC = () => {
+  const navigate = useNavigate();
+
+  const OpenConsultations = () => {
+    navigate("/consultant/consultations")
+  }
 
   return (
     <div style={{ display: "flex", justifyContent: "center", alignContent: "center", marginTop: 30 }}>
-        <h1>Home_consultant</h1>
+      <button onClick={OpenConsultations} >Konsultacijos</button>
     </div>
   )
 }

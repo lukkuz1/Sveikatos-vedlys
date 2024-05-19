@@ -8,6 +8,7 @@ export interface Health_mission {
   missionDescription: string;
   missionType: string;
   missionDuration: string;
+  missionStatus: string;
 }
 
 export enum Mission_type {
