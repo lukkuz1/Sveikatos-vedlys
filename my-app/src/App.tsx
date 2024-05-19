@@ -1,8 +1,15 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, NavLink, Routes } from 'react-router-dom'; // Importing NavLink from react-router-dom
-import './App.css';
-import Navigation_router_admin from './controllers/Admin/Navigation_router_admin';
-import Home_admin from './views/Admin/Home_admin';
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  NavLink,
+  Routes,
+} from "react-router-dom"; // Importing NavLink from react-router-dom
+import "./App.css";
+import Navigation_router_admin from "./controllers/Administrator/Navigation_router_admin";
+import Home_admin from "./views/Admin/Home_admin";
+import Home_healthy from "./views/User/Home_healthy";
+import Navigation_router_user from "./controllers/User/Navigation_router_user";
 
 import Home_consultant from './views/Consultant/Home_consultant';
 import Navigation_router_consultant from './controllers/Consultant/Navigation_router_consultant';
@@ -16,11 +23,13 @@ function App() {
   let isHealthy = true;
   let isConsultant = true;
   let isGuest = false;
-  let isUser = false;
+  let isUser = true;
 
   return (
     <div className="App">
-      <p><a href='/'>Sveikatos vedlys</a></p>
+      <p>
+        <a href="/">Sveikatos vedlys</a>
+      </p>
 
       {!signedIn && (
         <>
@@ -51,7 +60,7 @@ function App() {
       {signedIn && isHealthy && (
         <>
           <NavLink to="/healthy">
-            <button>Sveikuolio sąsaja</button>
+            <button>Naudotojo sąsaja</button>
           </NavLink>
         </>
       )}
@@ -68,20 +77,34 @@ export default function MainApp() {
           {/*<Route path="/login" Component={Login} />
           <Route path="/register" Component={Register} />*/}
           <Route path="/admin" Component={Home_admin} />
-          <Route path="/admin/missions" Component={Navigation_router_admin.RenderHealthMissionsPage} />
-          <Route path="/admin/missions/add" Component={Navigation_router_admin.RenderHealthMissionAddPage} />
-          <Route path="/admin/missions/:id" Component={Navigation_router_admin.RenderHealthMissionPage} />
-          <Route path="/admin/missions/:id/edit" Component={Navigation_router_admin.RenderHealthMissionEditPage} />
-
           {/* Consultant */}
           <Route path="/consultant" Component={Home_consultant} />
           <Route path="/consultant/consultations" Component={Navigation_router_consultant.RenderConsultations} />
           <Route path="/consultant/consultation/:id" Component={Navigation_router_consultant.RenderConsultationPage} />
           <Route path="/consultant/consultation/:id/reviews" Component={Navigation_router_consultant.RenderConsultationReviews} />
-
           {/* Healthy */}
           <Route path="/healthy" Component={Home_healthy} />
           <Route path="/healthy/missions" Component={Navigation_router_health.RenderHealthMissionsPage} />
+          <Route
+            path="/admin/missions"
+            Component={Navigation_router_admin.RenderHealthMissionsPage}
+          />
+          <Route
+            path="/admin/missions/add"
+            Component={Navigation_router_admin.RenderHealthMissionAddPage}
+          />
+          <Route
+            path="/admin/missions/:id"
+            Component={Navigation_router_admin.RenderHealthMissionPage}
+          />
+          <Route
+            path="/admin/missions/:id/edit"
+            Component={Navigation_router_admin.RenderHealthMissionEditPage}
+          />
+          <Route
+            path="/healthy/chatbot"
+            Component={Navigation_router_user.RenderChatBot}
+          />
         </Routes>
       </div>
     </Router>

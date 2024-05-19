@@ -17,6 +17,4 @@ export class Navigation_router_consultant {
   static RenderConsultationReviews() {
     return <ConsultationReviews />;
   }
-}
-
 export default Navigation_router_consultant;

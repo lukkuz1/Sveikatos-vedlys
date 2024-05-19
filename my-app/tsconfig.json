@@ -22,5 +22,5 @@
   },
   "include": [
     "src"
-  ]
+, "pages/api/chat_gpt", "api/chat_gpt/route.ts"  ]
 }
