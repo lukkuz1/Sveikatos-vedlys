@@ -6,7 +6,7 @@ const ChatbotPage = () => {
     {
       role: "assistant",
       content:
-        "Labas, aš esu Sveikatingumo robotas, kuo galiu šiandien jums padėti?",
+        "Hello I am a health robot, how can I help you today?",
     },
   ]);
   const [userInput, setUserInput] = useState("");
@@ -49,7 +49,7 @@ const ChatbotPage = () => {
   };
   return (
     <main className="chatbot-page">
-      <h1 className="title">Sveikatingumo robotas</h1>
+      <h1 className="title">Health robot</h1>
       <div className="chat-container">
         <div className="message-container">
           {messages.map((e, index) => (
@@ -62,7 +62,7 @@ const ChatbotPage = () => {
               {e.content}
             </div>
           ))}
-          {isLoading && <div className="message assistant">*Galvoja*</div>}
+          {isLoading && <div className="message assistant">*Thinking*</div>}
         </div>
         <div className="input-container">
           <input
@@ -70,14 +70,14 @@ const ChatbotPage = () => {
             value={userInput}
             onChange={(e) => setUserInput(e.target.value)}
             className="input-field"
-            placeholder="Įveskite savo žinutę"
+            placeholder="Input your message"
           />
           <button
             onClick={SubmitMessage}
             className={`send-button ${isLoading ? "disabled" : ""}`}
             disabled={isLoading}
           >
-            Siųsti
+            SSend
           </button>
         </div>
       </div>

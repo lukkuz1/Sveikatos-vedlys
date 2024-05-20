@@ -52,8 +52,8 @@ export const Healthy_diary_views_page: React.FC = () => {
           marginTop: 30,
         }}
       >
-        <button onClick={OpenDiaryEntryPage}>Dienoraščio peržiūra</button>
-        <button>Dienoraščio pridėjimas</button>
+        <button onClick={OpenDiaryEntryPage}>Healthy diary view</button>
+        <button>Healthy diary add</button>
       </div>
 
       <div style={{ marginTop: 30 }}>

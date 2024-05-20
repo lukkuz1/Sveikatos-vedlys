@@ -19,8 +19,8 @@ export const Healthy_diary_view_page: React.FC = () => {
           marginTop: 30,
         }}
       >
-        <button>Dienoraščio įrašo redagavimas</button>
-        <button>Dienoraščio įrašo ištrinimas</button>
+        <button>Healthy diary edit</button>
+        <button>Healthy diary remove</button>
       </div>
     </div>
   )
