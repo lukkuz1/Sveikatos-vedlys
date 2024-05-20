@@ -6,6 +6,7 @@ const Home_healthy: React.FC = () => {
 
   const OpenHealthMissionsPage = () => {
     navigate("/healthy/missions")
+  }
   const OpenChatBot = () => {
     navigate("/healthy/chatbot")
   }
@@ -17,5 +18,4 @@ const Home_healthy: React.FC = () => {
     </div>
   )
 }
-
 export default Home_healthy;
