@@ -1,6 +1,6 @@
 import {
     GetHealthMissionsData,
-    // JoinHealthMission,
+    JoinHealthMissionData,
     Health_mission
 } from "../../models/Health_mission";
 
@@ -9,22 +9,26 @@ export default function Healthy_controller() {
     const GetHealthMissions = async (): Promise<Health_mission[]> => {
         return await GetHealthMissionsData();
     };
+    const GetEndedMissions = (): string => {
+        return 'įvykdyta';
+    };
 
-    // const JoinHealthMission = async (id: string): Promise<Health_mission | null> => {
-    //     return await JoinHealthMission(id);
-    // };
+    const GetActiveMissions = (): string => {
+        return 'vykdoma';
+    };
 
-    // const GetEndedMissions = async (id: string): Promise<Health_mission | null> => {
-    //     return await GetConsultationReviews(id);
-    // };
-    // const GetActiveMissions = async (id: string): Promise<Health_mission | null> => {
-    //     return await GetConsultationReviews(id);
-    // };
+    const GetUncompletedMissions = (): string => {
+        return 'neįvykdyta';
+    };
 
+    const JoinHealthMission = async (missionId: string): Promise<void> => {
+        return await JoinHealthMissionData(missionId);
+    };
     return {
         GetHealthMissions,
-        // JoinHealthMission,
-        // GetEndedMissions,
-        // GetActiveMissions
+        JoinHealthMission,
+        GetEndedMissions,
+        GetActiveMissions,
+        GetUncompletedMissions
     };
 }
