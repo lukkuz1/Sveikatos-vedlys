@@ -5,7 +5,7 @@ import { app } from '../../services/firebase';
 import Mission from './Health_mission_view_page';
 import './Health_mission_edit_page.css'; // Import the CSS file
 import { Health_mission, EditHealthMissionData } from '../../models/Health_mission';
-import Health_mission_controller from '../../controllers/Administrator/Health_mission_controller';
+import Health_mission_controller from '../../controllers/Admin/Health_mission_controller';
 
 enum MissionType {
   Type1 = "sporto",
