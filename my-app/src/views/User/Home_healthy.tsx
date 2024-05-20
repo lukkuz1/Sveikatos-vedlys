@@ -8,9 +8,14 @@ const Home_healthy: React.FC = () => {
     navigate("/healthy/chatbot")
   }
 
+  const OpenDiaryMainPage = () => {
+    navigate("/healthy/diarypage")
+  }
+
   return (
     <div style={{ display: "flex", justifyContent: "center", alignContent: "center", marginTop: 30 }}>
       <button onClick={OpenChatBot} >Sveikatingumo robotas</button>
+      <button onClick={OpenDiaryMainPage} >Dienoraštis</button>
     </div>
   )
 }

@@ -87,6 +87,16 @@ export default function MainApp() {
             path="/healthy/chatbot"
             Component={Navigation_router_user.RenderChatBot}
           />
+
+          <Route
+            path="/healthy/diarypage"
+            Component={Navigation_router_user.RenderDiaryMainPage}
+          />
+
+          <Route
+            path="/healthy/diarypage/entry"
+            Component={Navigation_router_user.RenderDiaryEntryPage}
+          />
         </Routes>
       </div>
     </Router>
