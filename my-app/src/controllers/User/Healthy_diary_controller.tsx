@@ -8,9 +8,9 @@ export const FetchDiaryData = async (
   setError: Function
 ) => {
   try {
-    const diariesData = await GetDiaryData(); // Call GetDiaryData function to fetch diaries
+    const diariesData = await GetDiaryData();
     setDiaries(diariesData);
-    setShowAddDiary(diariesData.length === 0); // Hide add button if diaries exist
+    setShowAddDiary(diariesData.length === 0);
     setError("");
   } catch (err) {
     setError("Failed to fetch diaries. Please try again.");
@@ -29,18 +29,10 @@ export const IfThereAreFoodData = async (id: string) => {
     const diaryRef = ref(db, `diaries/${id}`);
     const diarySnapshot = await get(diaryRef);
     const diaryData = diarySnapshot.val();
-
-    // Log the structure of diaryData
-    console.log("Diary Data Structure:", diaryData);
-
-    if (diaryData && typeof diaryData.records === 'object') {
-      // Check if any record has diet data
-      const hasDietData = Object.values(diaryData.records).some((record: any) => record.diet && Object.keys(record.diet).length > 0);
-
-      // Log whether diet data is present
-      console.log("Has Diet Data:", hasDietData);
-
-      // Call the functions to update the diary with calculated values
+    if (diaryData && typeof diaryData.records === "object") {
+      const hasDietData = Object.values(diaryData.records).some(
+        (record: any) => record.diet && Object.keys(record.diet).length > 0
+      );
       if (hasDietData) {
         await calculateAverageCalorieIntake(id);
         await calculateAverageMealCount(id);
@@ -51,25 +43,17 @@ export const IfThereAreFoodData = async (id: string) => {
   }
 };
 
-
 export const IfThereAreWeightData = async (id: string) => {
   try {
     const db = getDatabase();
     const diaryRef = ref(db, `diaries/${id}`);
     const diarySnapshot = await get(diaryRef);
     const diaryData = diarySnapshot.val();
-
-    if (diaryData && typeof diaryData.records === 'object') {
-      // Iterate over each record in the diary
+    if (diaryData && typeof diaryData.records === "object") {
       for (const recordId in diaryData.records) {
         const record = diaryData.records[recordId];
         if (record.weight) {
-          // Weight data found, log it
-          console.log("Weight data found:", record.weight);
-          // Call calculateWeight function
           await calculateWeight(id);
-          // You can perform further actions here if needed
-          // For example, you might want to calculate some statistics based on weight data
         }
       }
     }
@@ -78,26 +62,17 @@ export const IfThereAreWeightData = async (id: string) => {
   }
 };
 
-
-
 export const IfThereAreSleepData = async (id: string) => {
   try {
     const db = getDatabase();
     const diaryRef = ref(db, `diaries/${id}`);
     const diarySnapshot = await get(diaryRef);
     const diaryData = diarySnapshot.val();
-
-    console.log("Diary Data:", diaryData); // Log diary data
-
     if (diaryData && diaryData.records) {
-      const recordsArray = Object.values(diaryData.records); // Convert records object to array
-
-      console.log("Records:", recordsArray); // Log records
-
-      const hasSleepData = recordsArray.some((record: any) => record.sleep_time && record.bedtime);
-
-      console.log("Has Sleep Data:", hasSleepData); // Log whether sleep data exists
-
+      const recordsArray = Object.values(diaryData.records);
+      const hasSleepData = recordsArray.some(
+        (record: any) => record.sleep_time && record.bedtime
+      );
       if (hasSleepData) {
         await calculateAverageSleepTime(id);
         await calculateAverageSleepDuration(id);
@@ -114,7 +89,6 @@ export const calculateAverageSleepTime = async (id: string) => {
     const diaryRef = ref(db, `diaries/${id}`);
     const diarySnapshot = await get(diaryRef);
     const diaryData = diarySnapshot.val();
-
     if (diaryData && diaryData.records) {
       const recordsArray = Object.values(diaryData.records);
       const sleepTimes = recordsArray
@@ -122,11 +96,12 @@ export const calculateAverageSleepTime = async (id: string) => {
         .filter((sleepTime: number) => !isNaN(sleepTime));
 
       if (sleepTimes.length > 0) {
-        const totalSleepTime = sleepTimes.reduce((acc: number, sleepTime: number) => acc + sleepTime, 0);
+        const totalSleepTime = sleepTimes.reduce(
+          (acc: number, sleepTime: number) => acc + sleepTime,
+          0
+        );
         const averageSleepTime = totalSleepTime / sleepTimes.length;
-
         await update(diaryRef, { average_sleep_time: averageSleepTime });
-        console.log(`Average sleep time for diary ${id}: ${averageSleepTime}`);
       }
     }
   } catch (error) {
@@ -140,7 +115,6 @@ export const calculateAverageSleepDuration = async (id: string) => {
     const diaryRef = ref(db, `diaries/${id}`);
     const diarySnapshot = await get(diaryRef);
     const diaryData = diarySnapshot.val();
-
     if (diaryData && diaryData.records) {
       const recordsArray = Object.values(diaryData.records);
       const sleepDurations = recordsArray
@@ -153,13 +127,15 @@ export const calculateAverageSleepDuration = async (id: string) => {
           return NaN;
         })
         .filter((duration: number) => !isNaN(duration));
-
       if (sleepDurations.length > 0) {
-        const totalSleepDuration = sleepDurations.reduce((acc: number, duration: number) => acc + duration, 0);
+        const totalSleepDuration = sleepDurations.reduce(
+          (acc: number, duration: number) => acc + duration,
+          0
+        );
         const averageSleepDuration = totalSleepDuration / sleepDurations.length;
-
-        await update(diaryRef, { average_sleep_duration: averageSleepDuration });
-        console.log(`Average sleep duration for diary ${id}: ${averageSleepDuration}`);
+        await update(diaryRef, {
+          average_sleep_duration: averageSleepDuration,
+        });
       }
     }
   } catch (error) {
@@ -173,33 +149,24 @@ export const calculateAverageCalorieIntake = async (id: string) => {
     const diaryRef = ref(db, `diaries/${id}`);
     const diarySnapshot = await get(diaryRef);
     const diaryData = diarySnapshot.val();
-
-    if (diaryData && typeof diaryData.records === 'object') {
+    if (diaryData && typeof diaryData.records === "object") {
       let totalCalories = 0;
       let totalMeals = 0;
-
-      // Iterate over each record in the diary
       for (const recordId in diaryData.records) {
         const record = diaryData.records[recordId];
         if (record.diet) {
-          // Iterate over each diet record in the record
           for (const dietRecordKey in record.diet) {
             const dietRecord = record.diet[dietRecordKey];
             const calories = parseFloat(dietRecord.calories);
             if (!isNaN(calories)) {
-              totalCalories += calories; // Accumulate calories
-              totalMeals++; // Increment meal count
+              totalCalories += calories;
+              totalMeals++;
             }
           }
         }
       }
-
-      // Calculate average calorie intake and meal count
       const averageCalorieIntake = totalCalories / totalMeals;
-
-      // Update diary with average calorie intake
       await update(diaryRef, { average_calorie_count: averageCalorieIntake });
-      console.log(`Average Calorie Intake for diary ${id}: ${averageCalorieIntake}`);
     }
   } catch (error) {
     console.error("Error calculating average calorie intake:", error);
@@ -212,33 +179,24 @@ export const calculateAverageMealCount = async (id: string) => {
     const diaryRef = ref(db, `diaries/${id}`);
     const diarySnapshot = await get(diaryRef);
     const diaryData = diarySnapshot.val();
-
-    if (diaryData && typeof diaryData.records === 'object') {
+    if (diaryData && typeof diaryData.records === "object") {
       let totalMeals = 0;
-
-      // Iterate over each record in the diary
       for (const recordId in diaryData.records) {
         const record = diaryData.records[recordId];
         if (record.diet) {
-          // Iterate over each diet record in the record
           for (const dietRecordKey in record.diet) {
-            totalMeals++; // Increment meal count
+            totalMeals++;
           }
         }
       }
-
-      // Calculate average meal count
-      const averageMealCount = totalMeals / Object.keys(diaryData.records).length;
-
-      // Update diary with average meal count
+      const averageMealCount =
+        totalMeals / Object.keys(diaryData.records).length;
       await update(diaryRef, { eat_count: averageMealCount });
-      console.log(`Average Meal Count for diary ${id}: ${averageMealCount}`);
     }
   } catch (error) {
     console.error("Error calculating average meal count:", error);
   }
 };
-
 
 const calculateWeight = async (id: string) => {
   try {
@@ -246,11 +204,8 @@ const calculateWeight = async (id: string) => {
     const diaryRef = ref(db, `diaries/${id}`);
     const diarySnapshot = await get(diaryRef);
     const diaryData = diarySnapshot.val();
-
-    if (diaryData && typeof diaryData.records === 'object') {
-      let lowestWeight = Infinity; // Initialize with a value higher than any possible weight
-
-      // Iterate over each record in the diary
+    if (diaryData && typeof diaryData.records === "object") {
+      let lowestWeight = Infinity;
       for (const recordId in diaryData.records) {
         const record = diaryData.records[recordId];
         if (record.weight) {
@@ -260,15 +215,10 @@ const calculateWeight = async (id: string) => {
           }
         }
       }
-
       if (isFinite(lowestWeight)) {
-        // Calculate weight change
-        const initialWeight = parseFloat(diaryData.weight || '0');
-        const weightChange = lowestWeight - initialWeight; // Adjusted to ensure positive weight change
-
-        // Update diary with weight change
+        const initialWeight = parseFloat(diaryData.weight || "0");
+        const weightChange = lowestWeight - initialWeight;
         await update(diaryRef, { weight_change: weightChange });
-        console.log(`Weight change for diary ${id}: ${weightChange}`);
       } else {
         console.log("No weight data found to calculate weight change.");
       }
@@ -277,8 +227,6 @@ const calculateWeight = async (id: string) => {
     console.error("Error calculating weight change:", error);
   }
 };
-
-
 
 const Healthy_diary_controller = {
   FetchDiaryData: FetchDiaryData,

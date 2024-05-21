@@ -35,7 +35,7 @@ export interface Record {
   weight: number;
   date: Date;
   diet?: Diet;
-  sport_activity?: Sport_activity; 
+  sport_activity?: Sport_activity;
 }
 
 export async function GetDiaryData(): Promise<Diary[]> {
@@ -49,7 +49,7 @@ export async function GetDiaryData(): Promise<Diary[]> {
       const diaries: Diary[] = Object.keys(data).map((key) => ({
         id: key,
         ...data[key],
-        records: mapRecords(data[key].records)
+        records: mapRecords(data[key].records),
       }));
       return diaries;
     } else {
@@ -70,6 +70,8 @@ function mapRecords(records: any): Record[] {
     ...records[key],
     date: new Date(records[key].date),
     diet: records[key].diet ? { ...records[key].diet } : undefined,
-    sport_activity: records[key].sport_activity ? { ...records[key].sport_activity } : undefined
+    sport_activity: records[key].sport_activity
+      ? { ...records[key].sport_activity }
+      : undefined,
   }));
 }
