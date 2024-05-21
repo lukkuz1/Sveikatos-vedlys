@@ -77,7 +77,7 @@ const ChatbotPage = () => {
             className={`send-button ${isLoading ? "disabled" : ""}`}
             disabled={isLoading}
           >
-            SSend
+            Send
           </button>
         </div>
       </div>
