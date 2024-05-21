@@ -9,7 +9,7 @@ const Home_healthy: React.FC = () => {
   }
 
   const OpenDiaryMainPage = () => {
-    navigate("/healthy/diarypage")
+    navigate("/healthy/diary")
   }
 
   return (
