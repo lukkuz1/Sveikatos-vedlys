@@ -104,6 +104,18 @@ export default function MainApp() {
             path="/healthy/chatbot"
             Component={Navigation_router_user.RenderChatBot}
           />
+          <Route 
+            path="/healthy/registeredConsultations" 
+            Component={Navigation_router_user.RenderRegisteredConsultationsPage} 
+          />
+          <Route 
+            path="/healthy/registeredConsultation/:id" 
+            Component={Navigation_router_user.RenderRegisteredConsultationPage} 
+          />
+          <Route 
+            path="/healthy/registeredConsultation/:id/reviews" 
+            Component={Navigation_router_user.RenderReview} 
+          />
         </Routes>
       </div>
     </Router>

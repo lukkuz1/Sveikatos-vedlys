@@ -8,6 +8,7 @@ export interface Consultation {
     consultationLink: string;
     consultationType: string;
     consultationTime: string;
+    status: string;
 }
 
 export enum Healthy_lifestyle_category {
@@ -56,3 +57,26 @@ export async function GetConsultationData(id: string): Promise<Consultation | nu
       return null;
     }
   }
+
+export async function GetRegisteredConsultations(): Promise<Consultation[]> {
+    try {
+        const db = getDatabase(app);
+        const dbRef = ref(db, "consultations");
+        const snapshot = await get(dbRef);
+
+        if (snapshot.exists()) {
+            const data = snapshot.val();
+            const consultations: Consultation[] = Object.keys(data).map((key) => ({
+                id: key,
+                ...data[key],
+            }));
+            return consultations.filter(consultation => consultation.status === "registruota");
+        } else {
+            console.log("No data available");
+            return [];
+        }
+    } catch (error) {
+        console.error("Error fetching data:", error);
+        return [];
+    }
+}
