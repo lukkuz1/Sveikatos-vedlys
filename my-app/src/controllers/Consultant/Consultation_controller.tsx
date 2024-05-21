@@ -1,9 +1,13 @@
 import {
     GetConsultationsData,
     GetConsultationData,
-    Consultation,
+    // AddConsultationData,
+    // DeleteConsultationData,
+    // EditConsultation,
+    Consultation
 } from "../../models/Consultation";
 import {
+    GetConsultationReviews,
     Review
 } from "../../models/Review";
 
@@ -20,10 +24,9 @@ export default function Consultation_controller() {
         return await GetConsultationReviews(id);
     };
 
-
     return {
         GetConsultations,
         GetConsultation,
-        GetConsultationReviews,
+        GetConsultationReviews
     };
 }
