@@ -30,20 +30,3 @@ export async function GetConsultationReviews(id: string): Promise<Review[]> {
         return [];
     }
 }
-export async function AddReview(consultationId: string, review: Review): Promise<void> {
-    try {
-        const db = getDatabase(app);
-        const dbRef = ref(db, `/reviews/${consultationId}`);
-        const newReviewRef = push(dbRef);
-        await set(newReviewRef, {
-            reviewDescription: review.reviewDescription,
-            reviewDate: review.reviewDate,
-            reviewAssessment: review.reviewAssessment,
-        });
-        console.log("Review added successfully");
-    } catch (error) {
-        console.error("Error adding review:", error);
-        throw error;
-    }
-}
-
