@@ -5,7 +5,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { Review } from "../../models/Review";
 import { Diary } from "../../models/Diary";
 
-const Registered_consultations_view_page: React.FC = () => {
+const Suggested_consultations_view_page: React.FC = () => {
   const [selectedCount, SubmitConsultationCount] = useState<number | null>(
     null
   );
@@ -190,4 +190,4 @@ const Registered_consultations_view_page: React.FC = () => {
   );
 };
 
-export default Registered_consultations_view_page;
+export default Suggested_consultations_view_page;
