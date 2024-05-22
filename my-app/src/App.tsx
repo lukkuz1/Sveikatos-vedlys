@@ -103,6 +103,21 @@ export default function MainApp() {
             Component={Navigation_router_user.RenderDiaryMainPage}
           />
 
+<Route
+            path="/suggested_consultation"
+            Component={Navigation_router_user.RenderSuggestedConsultation}
+          />
+
+<Route
+            path="/suggested_consultation/:id"
+            Component={Navigation_router_user.RenderConsultation}
+          />
+
+<Route
+            path="/suggested_consultation/:id/register"
+            Component={Navigation_router_user.RenderConsultationRegister}
+          />
+
           <Route path="/healthy/diary/add" Component={AddDiaryEntryPage} />
 
           <Route
