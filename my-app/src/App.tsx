@@ -9,6 +9,16 @@ import "./App.css";
 import Navigation_router_admin from "./controllers/Admin/Navigation_router_admin";
 import Home_admin from "./views/Admin/Home_admin";
 import Navigation_router_user from "./controllers/User/Navigation_router_user";
+import AddDiaryEntryPage from "./views/User/Healthy_diary_add_page";
+import ViewDiaryEntryPage from "./views/User/Healthy_diary_view_page";
+import EditDiaryEntryPage from "./views/User/Healthy_diary_edit_page";
+import RemoveDiaryEntryPage from "./views/User/Healthy_diary_remove_page";
+import AddRecordPage from "./views/User/Healthy_diary_record_add_page";
+import ViewRecordPage from "./views/User/Healthy_diary_view_records_page";
+import EditRecordPage from "./views/User/Healthy_diary_record_edit_page";
+import RemoveRecordPage from "./views/User/Healthy_diary_record_remove_page";
+import AddSportActivityPage from "./views/User/Healthy_diary_sport_activity_add_page";
+import AddDietPage from "./views/User/Healthy_diary_diet_add_page";
 
 import Home_consultant from './views/Consultant/Home_consultant';
 import Navigation_router_consultant from './controllers/Consultant/Navigation_router_consultant';
@@ -104,6 +114,75 @@ export default function MainApp() {
             path="/healthy/chatbot"
             Component={Navigation_router_user.RenderChatBot}
           />
+
+          <Route
+            path="/healthy/diary"
+            Component={Navigation_router_user.RenderDiaryMainPage}
+          />
+
+<Route
+            path="/suggested_consultation"
+            Component={Navigation_router_user.RenderSuggestedConsultation}
+          />
+
+<Route
+            path="/suggested_consultation/:id"
+            Component={Navigation_router_user.RenderSelectedConsultation}
+          />
+
+<Route
+            path="/suggested_consultation/:id/register"
+            Component={Navigation_router_user.RenderConsultationRegister}
+          />
+
+          <Route path="/healthy/diary/add" Component={AddDiaryEntryPage} />
+
+          <Route
+            path="/healthy/diary/view/:id"
+            Component={ViewDiaryEntryPage}
+          />
+
+          <Route
+            path="/healthy/diary/edit/:id"
+            Component={EditDiaryEntryPage}
+          />
+
+          <Route
+            path="/healthy/diary/remove/:id"
+            Component={RemoveDiaryEntryPage}
+          />
+
+          <Route
+            path="/healthy/diary/view/:id/add-record"
+            Component={AddRecordPage}
+          />
+
+          <Route
+            path="/healthy/diary/view/:id/record/view/:recordId"
+            Component={ViewRecordPage}
+          />
+
+          <Route
+            path="/healthy/diary/view/:id/record/view/:recordId/remove"
+            Component={RemoveRecordPage}
+          />
+
+          <Route
+            path="/healthy/diary/view/:id/record/view/:recordId/edit"
+            Component={EditRecordPage}
+          />
+
+<Route
+            path="/healthy/diary/view/:id/record/view/:recordId/sport_activity/add"
+            Component={AddSportActivityPage}
+          />
+
+<Route
+            path="/healthy/diary/view/:id/record/view/:recordId/diet/add"
+            Component={AddDietPage}
+          />
+
+
         </Routes>
       </div>
     </Router>

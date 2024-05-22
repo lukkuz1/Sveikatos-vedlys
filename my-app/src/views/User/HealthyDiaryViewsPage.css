@@ -1,0 +1,58 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 30px;
+  }
+  
+  .addDiaryButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+  }
+  
+  .errorMessage {
+    color: red;
+    font-weight: bold;
+  }
+  
+  .statisticsList {
+    margin-top: 30px;
+  }
+  
+  .statisticsItem {
+    list-style: none;
+  }
+  
+  .user-statistics {
+    text-align: left;
+    margin-top: 20px;
+  }
+  
+  .user-statistics h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .user-statistics p {
+    font-size: 18px;
+    margin: 5px 0;
+  }
+  
+  .statisticsTitle {
+    font-weight: bold;
+    color: #FF5733;
+  }
+  
+  .statisticsValue {
+    font-weight: bold;
+    color: #1E90FF;
+  }
+  
+  .statisticsHumor {
+    font-style: italic;
+    color: #4CAF50; 
+    transform: rotate(-10deg); 
+  }

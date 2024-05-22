@@ -11,10 +11,21 @@ const Home_healthy: React.FC = () => {
     navigate("/healthy/chatbot")
   }
 
+  const OpenDiaryMainPage = () => {
+    navigate("/healthy/diary")
+  }
+
+  const OpenSuggestedConsultation = () => {
+    navigate("/suggested_consultation")
+  }
+
+
   return (
     <div style={{ display: "flex", justifyContent: "center", alignContent: "center", marginTop: 30 }}>
-      <button onClick={OpenHealthMissionsPage} >Sveikatingumo iššūkiai</button>
-      <button onClick={OpenChatBot} >Sveikatingumo robotas</button>
+      <button onClick={OpenChatBot} >Healthy robot</button>
+      <button onClick={OpenDiaryMainPage} >Diary</button>
+      <button onClick={OpenSuggestedConsultation}>Suggested consultations</button>
+      <button onClick={OpenHealthMissionsPage} >Health missions</button>
     </div>
   )
 }
