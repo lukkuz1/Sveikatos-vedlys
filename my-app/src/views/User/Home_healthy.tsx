@@ -25,7 +25,7 @@ const Home_healthy: React.FC = () => {
       <button onClick={OpenChatBot} >Healthy robot</button>
       <button onClick={OpenDiaryMainPage} >Diary</button>
       <button onClick={OpenSuggestedConsultation}>Suggested consultations</button>
-      <button onClick={OpenHealthMissionsPage} >Sveikatingumo iššūkiai</button>
+      <button onClick={OpenHealthMissionsPage} >Health missions</button>
     </div>
   )
 }

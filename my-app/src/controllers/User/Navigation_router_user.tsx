@@ -2,7 +2,7 @@ import Chatbot_page from '../../views/User/Chatbot_page';
 import Healthy_diary_views_page from '../../views/User/Healthy_diary_views_page';
 import Suggested_consultations_view_page from '../../views/User/Suggested_consultations_view_page';
 import Suggested_consultation_view_page from '../../views/User/Suggested_consultation_view_page';
-import Suggested_consultation_register_page from '../../views/User/Suggested_consultation_register_page';
+import RegisterConsultationPage from '../../views/User/Suggested_consultation_register_page';
 
 import { JsxElement } from 'typescript';
 
@@ -20,12 +20,12 @@ export class Navigation_router_user {
     return <Suggested_consultations_view_page/>;
   }
 
-  static RenderConsultation() {
+  static RenderSelectedConsultation() {
     return <Suggested_consultation_view_page/>;
   }
 
   static RenderConsultationRegister() {
-    return <Suggested_consultation_register_page/>;
+    return <RegisterConsultationPage/>;
   }
 
 

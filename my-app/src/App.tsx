@@ -127,7 +127,7 @@ export default function MainApp() {
 
 <Route
             path="/suggested_consultation/:id"
-            Component={Navigation_router_user.RenderConsultation}
+            Component={Navigation_router_user.RenderSelectedConsultation}
           />
 
 <Route
