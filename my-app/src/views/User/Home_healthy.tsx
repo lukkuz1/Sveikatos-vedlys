@@ -4,6 +4,9 @@ import { useNavigate } from "react-router-dom";
 const Home_healthy: React.FC = () => {
   const navigate = useNavigate();
 
+  const OpenHealthMissionsPage = () => {
+    navigate("/healthy/missions")
+  }
   const OpenChatBot = () => {
     navigate("/healthy/chatbot")
   }
@@ -22,8 +25,8 @@ const Home_healthy: React.FC = () => {
       <button onClick={OpenChatBot} >Healthy robot</button>
       <button onClick={OpenDiaryMainPage} >Diary</button>
       <button onClick={OpenSuggestedConsultation}>Suggested consultations</button>
+      <button onClick={OpenHealthMissionsPage} >Sveikatingumo iššūkiai</button>
     </div>
   )
 }
-
 export default Home_healthy;

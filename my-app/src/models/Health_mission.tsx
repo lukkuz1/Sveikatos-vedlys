@@ -1,5 +1,5 @@
 
-import { getDatabase, ref, get, set, push, remove } from "firebase/database";
+import { getDatabase, ref, get, set, push, remove, update } from "firebase/database";
 import { app } from "../services/firebase";
 import React, { useEffect, useState } from 'react';
 
@@ -8,6 +8,7 @@ export interface Health_mission {
   missionDescription: string;
   missionType: string;
   missionDuration: string;
+  missionStatus: string;
 }
 
 export enum Mission_type {
@@ -124,6 +125,19 @@ export async function EditHealthMissionData(
     const missionRef = ref(db, `missions/${id}`);
     await set(missionRef, missionData);
     alert("Iššūkis sėkmingai redaguotas!");
+  } catch (error) {
+    console.error("Error updating mission:", error);
+    throw error;
+  }
+}
+
+export async function JoinHealthMissionData(id: string): Promise<void> {
+  try {
+    const db = getDatabase(app);
+    const missionRef = ref(db, `missions/${id}`);
+    
+    await update(missionRef, { missionStatus: 'vykdoma' });
+    // alert("Prie įšūkio sėkmingai prisijungtą!");
   } catch (error) {
     console.error("Error updating mission:", error);
     throw error;

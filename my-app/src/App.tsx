@@ -8,7 +8,6 @@ import {
 import "./App.css";
 import Navigation_router_admin from "./controllers/Admin/Navigation_router_admin";
 import Home_admin from "./views/Admin/Home_admin";
-import Home_healthy from "./views/User/Home_healthy";
 import Navigation_router_user from "./controllers/User/Navigation_router_user";
 import AddDiaryEntryPage from "./views/User/Healthy_diary_add_page";
 import ViewDiaryEntryPage from "./views/User/Healthy_diary_view_page";
@@ -21,11 +20,17 @@ import RemoveRecordPage from "./views/User/Healthy_diary_record_remove_page";
 import AddSportActivityPage from "./views/User/Healthy_diary_sport_activity_add_page";
 import AddDietPage from "./views/User/Healthy_diary_diet_add_page";
 
+import Home_consultant from './views/Consultant/Home_consultant';
+import Navigation_router_consultant from './controllers/Consultant/Navigation_router_consultant';
+
+import Home_healthy from './views/User/Home_healthy';
+import Navigation_router_health from './controllers/Healthy/Navigation_router_health';
+
 function App() {
   let signedIn = true;
   let isAdmin = true;
   let isHealthy = true;
-  let isConsultant = false;
+  let isConsultant = true;
   let isGuest = false;
   let isUser = true;
 
@@ -54,7 +59,13 @@ function App() {
           </NavLink>
         </>
       )}
-
+      {signedIn && isConsultant && (
+        <>
+          <NavLink to="/consultant">
+            <button>Konsultanto sąsaja</button>
+          </NavLink>
+        </>
+      )}
       {signedIn && isHealthy && (
         <>
           <NavLink to="/healthy">
@@ -75,6 +86,14 @@ export default function MainApp() {
           {/*<Route path="/login" Component={Login} />
           <Route path="/register" Component={Register} />*/}
           <Route path="/admin" Component={Home_admin} />
+          {/* Consultant */}
+          <Route path="/consultant" Component={Home_consultant} />
+          <Route path="/consultant/consultations" Component={Navigation_router_consultant.RenderConsultations} />
+          <Route path="/consultant/consultation/:id" Component={Navigation_router_consultant.RenderConsultationPage} />
+          <Route path="/consultant/consultation/:id/reviews" Component={Navigation_router_consultant.RenderConsultationReviews} />
+          {/* Healthy */}
+          <Route path="/healthy" Component={Home_healthy} />
+          <Route path="/healthy/missions" Component={Navigation_router_health.RenderHealthMissionsPage} />
           <Route
             path="/admin/missions"
             Component={Navigation_router_admin.RenderHealthMissionsPage}
@@ -91,8 +110,6 @@ export default function MainApp() {
             path="/admin/missions/:id/edit"
             Component={Navigation_router_admin.RenderHealthMissionEditPage}
           />
-
-          <Route path="/healthy" Component={Home_healthy} />
           <Route
             path="/healthy/chatbot"
             Component={Navigation_router_user.RenderChatBot}
