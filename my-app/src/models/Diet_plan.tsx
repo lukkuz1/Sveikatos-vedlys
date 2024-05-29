@@ -1,7 +1,7 @@
 import { getDatabase, ref, get, set, update } from "firebase/database";
 import { app } from "../services/firebase";
 
-interface FoodItem {
+export interface FoodItem {
     name: string;
     calories: number;
     servingSizeG: number;
@@ -16,7 +16,7 @@ interface FoodItem {
     sugarG: number;
   }
   
-  interface DayPlan {
+  export interface DayPlan {
     day: number;
     meals: FoodItem[];
   }
@@ -115,4 +115,29 @@ interface FoodItem {
       console.error("Error adding/updating dummy diet plan:", error);
     }
   }
+
+  export async function AddDietPlanData(criteria: DietPlan): Promise<void> {
+    try {
+        // Initialize dailyPlans as an empty array
+        const dietPlanWithEmptyDailyPlans: DietPlan = {
+            ...criteria,
+            dailyPlans: []
+        };
+
+        const db = getDatabase(app);
+        const dbRef = ref(db, `dietPlans/${criteria.id}`);
+        const snapshot = await get(dbRef);
+
+        if (snapshot.exists()) {
+            await update(dbRef, dietPlanWithEmptyDailyPlans);
+            console.log("Diet plan updated successfully");
+        } else {
+            await set(dbRef, dietPlanWithEmptyDailyPlans);
+            console.log("Diet plan added successfully");
+        }
+    } catch (error) {
+        console.error("Error adding/updating diet plan:", error);
+        throw error; // Re-throw the error to propagate it to the caller
+    }
+}
 
