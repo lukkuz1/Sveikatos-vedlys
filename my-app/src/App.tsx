@@ -95,6 +95,16 @@ export default function MainApp() {
           <Route path="/healthy" Component={Home_healthy} />
           <Route path="/healthy/missions" Component={Navigation_router_health.RenderHealthMissionsPage} />
           <Route
+            path="/diet_plan"
+            Component={Navigation_router_health.RenderDietPlanPage}
+          />
+
+<Route
+            path="/diet_plan/criteria_page"
+            Component={Navigation_router_health.RenderDietCriteriaPage}
+          />
+
+          <Route
             path="/admin/missions"
             Component={Navigation_router_admin.RenderHealthMissionsPage}
           />

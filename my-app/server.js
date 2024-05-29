@@ -17,7 +17,36 @@ app.use(cors());
 
 
 // Route to handle calories burned queries
-app.post('/api/calories_burned', async (req, res) => {
+app.post('/api/nutrition', async (req, res) => {
+  const query = req.body.query;
+
+  if (!query) {
+    return res.status(400).json({ error: 'Query is required' });
+  }
+
+  try {
+    const response = await axios.get('https://api.api-ninjas.com/v1/nutrition', {
+      headers: {
+        'X-Api-Key': '+zUN4owWiF5rCoJi9kTwhQ==rZcxhOCsJQeElreX'
+      },
+      params: {
+        query: query
+      }
+    });
+
+    console.log(response.data);
+    res.status(200).json(response.data);
+  } catch (error) {
+    console.error('Request failed:', error);
+    if (error.response) {
+      res.status(error.response.status).json({ error: error.response.data });
+    } else {
+      res.status(500).json({ error: 'Request failed' });
+    }
+  }
+});
+
+app.post('/api/nutrition', async (req, res) => {
   const activity = req.body.activity;
 
   if (!activity) {

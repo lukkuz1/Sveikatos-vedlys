@@ -19,6 +19,10 @@ const Home_healthy: React.FC = () => {
     navigate("/suggested_consultation")
   }
 
+  const OpenDietPlanPage = () => {
+    navigate("/diet_plan")
+  }
+
 
   return (
     <div style={{ display: "flex", justifyContent: "center", alignContent: "center", marginTop: 30 }}>
@@ -26,6 +30,7 @@ const Home_healthy: React.FC = () => {
       <button onClick={OpenDiaryMainPage} >Diary</button>
       <button onClick={OpenSuggestedConsultation}>Suggested consultations</button>
       <button onClick={OpenHealthMissionsPage} >Health missions</button>
+      <button onClick={OpenDietPlanPage} >Diet plan</button>
     </div>
   )
 }
