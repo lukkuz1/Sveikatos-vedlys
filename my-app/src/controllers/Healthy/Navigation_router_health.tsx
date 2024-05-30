@@ -18,6 +18,14 @@ export class Navigation_router_health {
   static RenderDietCriteriaPage() {
     return <Diet_plan_criteria_page />;
   }
+
+  static RenderClosestShopCriteriaPage() {
+    return <Closest_shop_criteria_page />
+  }
+
+  static RenderBestShop() {
+    return <Closest_shop_page />
+  }
 }
 
 export default Navigation_router_health;

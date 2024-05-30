@@ -25,6 +25,7 @@ import Navigation_router_consultant from './controllers/Consultant/Navigation_ro
 
 import Home_healthy from './views/User/Home_healthy';
 import Navigation_router_health from './controllers/Healthy/Navigation_router_health';
+import { MealProvider } from "./hooks/MealContext";
 
 function App() {
   let signedIn = true;
@@ -80,7 +81,7 @@ function App() {
 export default function MainApp() {
   return (
     <Router>
-      <div>
+      <MealProvider>
         <App />
         <Routes>
           {/*<Route path="/login" Component={Login} />
@@ -99,9 +100,19 @@ export default function MainApp() {
             Component={Navigation_router_health.RenderDietPlanPage}
           />
 
-<Route
+          <Route
             path="/diet_plan/criteria_page"
             Component={Navigation_router_health.RenderDietCriteriaPage}
+          />
+
+          <Route
+            path="/diet_plan/closest_shop_criteria_page/:id"
+            Component={Navigation_router_health.RenderClosestShopCriteriaPage}
+          />
+
+          <Route
+            path="/diet_plan/closest_shop_page/"
+            Component={Navigation_router_health.RenderBestShop}
           />
 
           <Route
@@ -130,17 +141,17 @@ export default function MainApp() {
             Component={Navigation_router_user.RenderDiaryMainPage}
           />
 
-<Route
+          <Route
             path="/suggested_consultation"
             Component={Navigation_router_user.RenderSuggestedConsultation}
           />
 
-<Route
+          <Route
             path="/suggested_consultation/:id"
             Component={Navigation_router_user.RenderSelectedConsultation}
           />
 
-<Route
+          <Route
             path="/suggested_consultation/:id/register"
             Component={Navigation_router_user.RenderConsultationRegister}
           />
@@ -182,19 +193,20 @@ export default function MainApp() {
             Component={EditRecordPage}
           />
 
-<Route
+          <Route
             path="/healthy/diary/view/:id/record/view/:recordId/sport_activity/add"
             Component={AddSportActivityPage}
           />
 
-<Route
+          <Route
             path="/healthy/diary/view/:id/record/view/:recordId/diet/add"
             Component={AddDietPage}
           />
 
 
         </Routes>
-      </div>
+      </MealProvider>
     </Router>
+
   );
 }

@@ -21,6 +21,9 @@
     "jsx": "react-jsx"
   },
   "include": [
-    "src"
-, "pages/api/chat_gpt", "api/chat_gpt/route.ts"  ]
+    "src",
+    "pages/api/chat_gpt",
+    "api/chat_gpt/route.ts",
+    "server.ts"
+  ]
 }
